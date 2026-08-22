@@ -1,0 +1,2591 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onam Pure CSS Art — King Mahabali (Maveli)</title>
+  <meta name="description" content="Pure HTML and CSS artwork celebrating Onam with King Mahabali, Olakkuda, Nilavilakku, and animated Pookkalam." />
+  <style>
+    /* ==========================================================================
+       ONAM PURE CSS ARTWORK — KING MAHABALI (MAVELI) & FESTIVAL GREETING
+       Rules: Pure HTML & CSS only. No JS. No images. No external fonts. <50KB.
+       ========================================================================== */
+
+    :root {
+      /* Palette */
+      --gold-light: #fff3a1;
+      --gold: #fbbf24;
+      --gold-rich: #d97706;
+      --gold-dark: #78350f;
+      --gold-shadow: #451a03;
+      --kasavu-cream: #fffdf5;
+      --kasavu-border: #d4af37;
+      --skin-highlight: #f6ad7b;
+      --skin: #d97736;
+      --skin-shadow: #a84e15;
+      --skin-dark: #7c2d12;
+      --ruby: #dc2626;
+      --ruby-dark: #991b1b;
+      --emerald: #059669;
+      --emerald-dark: #064e3b;
+      --marigold-orange: #ea580c;
+      --marigold-yellow: #facc15;
+      --flower-pink: #ec4899;
+      --flower-white: #f8fafc;
+      --brass-base: #b45309;
+      --brass-light: #fef08a;
+      
+      /* Theme Ambiance Variables (Default Sunset / Twilight) */
+      --bg-sky-1: #1e1b4b;
+      --bg-sky-2: #4c1d95;
+      --bg-sky-3: #831843;
+      --bg-sky-4: #c2410c;
+      --bg-sky-5: #fbbf24;
+      --ground-1: #064e3b;
+      --ground-2: #022c22;
+      --lamp-glow: rgba(251, 191, 36, 0.45);
+      --aura-opacity: 0.85;
+      --text-glow: rgba(253, 224, 71, 0.6);
+      --banner-bg: rgba(30, 27, 75, 0.85);
+      --banner-border: rgba(251, 191, 36, 0.4);
+    }
+
+    /* CSS-Only Interactive Theme Overrides via Radio Checkboxes */
+    #mode-day:checked ~ .app-canvas {
+      --bg-sky-1: #0284c7;
+      --bg-sky-2: #38bdf8;
+      --bg-sky-3: #bae6fd;
+      --bg-sky-4: #fed7aa;
+      --bg-sky-5: #fef08a;
+      --ground-1: #15803d;
+      --ground-2: #166534;
+      --lamp-glow: rgba(251, 191, 36, 0.25);
+      --aura-opacity: 0.5;
+      --text-glow: rgba(234, 88, 12, 0.4);
+      --banner-bg: rgba(255, 255, 255, 0.9);
+      --banner-border: rgba(217, 119, 6, 0.4);
+      color: #78350f;
+    }
+
+    #mode-night:checked ~ .app-canvas {
+      --bg-sky-1: #050515;
+      --bg-sky-2: #0f172a;
+      --bg-sky-3: #1e1b4b;
+      --bg-sky-4: #311042;
+      --bg-sky-5: #581c87;
+      --ground-1: #022c22;
+      --ground-2: #01140e;
+      --lamp-glow: rgba(251, 191, 36, 0.7);
+      --aura-opacity: 1;
+      --text-glow: rgba(250, 204, 21, 0.8);
+      --banner-bg: rgba(15, 23, 42, 0.9);
+      --banner-border: rgba(251, 191, 36, 0.6);
+    }
+
+    #toggle-petals:not(:checked) ~ .app-canvas .petal-rain {
+      display: none;
+    }
+
+    #toggle-umbrella:checked ~ .app-canvas .olakkuda {
+      transform: rotate(-15deg) scale(1.05);
+    }
+
+    #toggle-crackers:not(:checked) ~ .app-canvas .crackers-sky {
+      display: none;
+    }
+
+    #mode-night:checked ~ .app-canvas .crackers-sky {
+      filter: brightness(1.35) drop-shadow(0 0 14px rgba(251, 191, 36, 0.75));
+    }
+
+    /* Reset & Base Setup */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Malayalam Sangam MN", "AnjaliOldLipi", "Manjari", "Noto Sans Malayalam", Georgia, serif;
+      background: #09090b;
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Hidden Checkbox Controls for Pure CSS Interactivity */
+    .css-control-input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Control Toolbar */
+    .controls-toolbar {
+      position: fixed;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      display: flex;
+      gap: 6px;
+      padding: 6px 10px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      border-radius: 9999px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(251, 191, 36, 0.2);
+    }
+
+    .ctrl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.25s ease;
+      color: #fde68a;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(251, 191, 36, 0.15);
+      color: #fff;
+    }
+
+    #mode-twilight:checked ~ .controls-toolbar label[for="mode-twilight"],
+    #mode-day:checked ~ .controls-toolbar label[for="mode-day"],
+    #mode-night:checked ~ .controls-toolbar label[for="mode-night"],
+    #toggle-petals:checked ~ .controls-toolbar label[for="toggle-petals"],
+    #toggle-umbrella:checked ~ .controls-toolbar label[for="toggle-umbrella"],
+    #toggle-crackers:checked ~ .controls-toolbar label[for="toggle-crackers"] {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #451a03;
+      border-color: #fef08a;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+    }
+
+    .ctrl-divider {
+      width: 1px;
+      height: 18px;
+      align-self: center;
+      background: rgba(251, 191, 36, 0.25);
+    }
+
+    /* Main Canvas Wrapper */
+    .app-canvas {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 60px 16px 40px;
+      background: linear-gradient(180deg, var(--bg-sky-1) 0%, var(--bg-sky-2) 30%, var(--bg-sky-3) 55%, var(--bg-sky-4) 75%, var(--bg-sky-5) 90%, var(--ground-1) 90%, var(--ground-2) 100%);
+      transition: background 0.8s ease;
+      overflow: hidden;
+    }
+
+    /* Background Scenery: Palms & Backwaters */
+    .scenery-backdrop {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    /* Celestial Body (Sun/Moon Aura) */
+    .celestial-orb {
+      position: absolute;
+      top: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(254, 240, 138, 0.45) 0%, rgba(245, 158, 11, 0.25) 40%, rgba(220, 38, 38, 0.08) 70%, transparent 80%);
+      filter: blur(10px);
+      animation: pulse-aura 6s ease-in-out infinite alternate;
+    }
+
+    /* Coconut Palms Silhouette */
+    .palm-left, .palm-right {
+      position: absolute;
+      bottom: 8%;
+      width: 220px;
+      height: 480px;
+      opacity: 0.35;
+      z-index: 2;
+    }
+
+    .palm-left {
+      left: -30px;
+      transform: rotate(8deg);
+    }
+
+    .palm-right {
+      right: -30px;
+      transform: scaleX(-1) rotate(8deg);
+    }
+
+    .palm-trunk {
+      position: absolute;
+      bottom: 0;
+      left: 70px;
+      width: 18px;
+      height: 380px;
+      background: linear-gradient(90deg, #1c1917, #0c0a09);
+      border-radius: 50% 50% 0 0 / 10% 10% 0 0;
+      transform: skewX(-6deg);
+    }
+
+    .palm-frond {
+      position: absolute;
+      top: 80px;
+      left: 30px;
+      width: 140px;
+      height: 50px;
+      border-top: 14px solid #064e3b;
+      border-radius: 50% 50% 0 0;
+      transform-origin: left bottom;
+    }
+
+    .f1 { transform: rotate(-50deg) scale(1.1); }
+    .f2 { transform: rotate(-25deg) scale(1.2); }
+    .f3 { transform: rotate(5deg) scale(1.3); }
+    .f4 { transform: rotate(35deg) scale(1.2); }
+    .f5 { transform: rotate(65deg) scale(1.1); }
+
+    /* Kerala Snake Boat (Chundan Vallam) Silhouette */
+    .snake-boat {
+      position: absolute;
+      bottom: 11%;
+      right: 6%;
+      width: 180px;
+      height: 24px;
+      background: #0f172a;
+      clip-path: polygon(0% 90%, 15% 100%, 85% 100%, 98% 30%, 100% 0%, 92% 70%, 10% 75%);
+      opacity: 0.4;
+      animation: gentle-bob 4s ease-in-out infinite alternate;
+    }
+
+    .boat-rowers {
+      position: absolute;
+      bottom: 12.5%;
+      right: 8%;
+      width: 120px;
+      height: 12px;
+      background: repeating-linear-gradient(90deg, #0f172a 0px, #0f172a 3px, transparent 3px, transparent 10px);
+      opacity: 0.4;
+    }
+
+    /* Header Greeting Banner */
+    .greeting-header {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      margin-bottom: 24px;
+      padding: 18px 28px;
+      background: var(--banner-bg);
+      border: 2px solid var(--banner-border);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4), 0 0 25px rgba(251, 191, 36, 0.2);
+      backdrop-filter: blur(10px);
+      max-width: 640px;
+      width: 100%;
+    }
+
+    .temple-border-decor {
+      height: 8px;
+      width: 100%;
+      margin: 6px 0;
+      background: repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 6px, transparent 6px, transparent 12px), repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 6px, transparent 6px, transparent 12px);
+      opacity: 0.8;
+    }
+
+    .sub-greeting {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: #fde047;
+      margin-bottom: 4px;
+      text-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+    }
+
+    .malayalam-title {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+      background: linear-gradient(135deg, #ffffff 0%, #fef08a 40%, #f59e0b 80%, #ffd700 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+      margin-bottom: 4px;
+    }
+
+    .english-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: #fef3c7;
+      text-shadow: 0 2px 10px var(--text-glow);
+    }
+
+    .wish-caption {
+      font-size: 12px;
+      color: #fef08a;
+      opacity: 0.9;
+      margin-top: 4px;
+      font-style: italic;
+      letter-spacing: 0.04em;
+    }
+
+    /* Main Stage: Maveli, Lamps, and Pookkalam */
+    .stage-container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 800px;
+      margin-top: 10px;
+    }
+
+    .flank-elements-wrapper {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    /* ==========================================================================
+       MAVELI (KING MAHABALI) CHARACTER CSS
+       ========================================================================== */
+    .maveli-figure {
+      position: relative;
+      width: 320px;
+      height: 460px;
+      z-index: 5;
+      margin: 0 auto;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .maveli-figure:hover {
+      transform: scale(1.02);
+    }
+
+    /* Royal Golden Aura behind Maveli */
+    .maveli-aura {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(254, 240, 138, 0.45) 0%, rgba(245, 158, 11, 0.3) 45%, rgba(220, 38, 38, 0.1) 70%, transparent 80%);
+      z-index: 0;
+      opacity: var(--aura-opacity);
+      animation: rotate-rays 16s linear infinite;
+    }
+
+    .aura-rays {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: repeating-conic-gradient(from 0deg, rgba(254, 240, 138, 0.25) 0deg, rgba(254, 240, 138, 0.25) 10deg, transparent 10deg, transparent 20deg);
+    }
+
+    /* ----------------------------------------------------
+       OLAKKUDA (Traditional Palm-Leaf Umbrella)
+       ---------------------------------------------------- */
+    .olakkuda {
+      position: absolute;
+      top: -30px;
+      left: -35px;
+      width: 220px;
+      height: 220px;
+      z-index: 2;
+      transform: rotate(-8deg);
+      transform-origin: 180px 240px;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation: umbrella-sway 5s ease-in-out infinite alternate;
+    }
+
+    .olakkuda-canopy {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: 
+        radial-gradient(circle at center, #d97706 0%, #b45309 25%, #92400e 55%, #78350f 75%, #451a03 100%);
+      box-shadow: 
+        inset 0 0 15px rgba(0, 0, 0, 0.6),
+        0 10px 25px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      border: 3px solid #78350f;
+    }
+
+    /* Concentric palm leaf ribs */
+    .olakkuda-ribs {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: 
+        repeating-conic-gradient(from 0deg, rgba(254, 243, 199, 0.25) 0deg, rgba(254, 243, 199, 0.25) 3deg, transparent 3deg, transparent 15deg),
+        repeating-radial-gradient(circle at center, transparent 0, transparent 12px, rgba(120, 53, 15, 0.6) 13px, rgba(254, 240, 138, 0.2) 15px);
+    }
+
+    .olakkuda-cap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fde047 0%, #d97706 70%, #78350f 100%);
+      border: 2px solid #fffbeb;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .olakkuda-rim-fringe {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 3px dashed #d97706;
+      opacity: 0.6;
+    }
+
+    .olakkuda-handle {
+      position: absolute;
+      top: 95px;
+      left: 96px;
+      width: 9px;
+      height: 250px;
+      background: linear-gradient(90deg, #b45309 0%, #fef08a 40%, #92400e 70%, #451a03 100%);
+      border-radius: 4px;
+      transform: rotate(20deg);
+      transform-origin: top center;
+      box-shadow: -2px 3px 6px rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    /* ----------------------------------------------------
+       KIREEDAM (Royal Kerala Gold Crown)
+       ---------------------------------------------------- */
+    .kireedam-crown {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 120px;
+      z-index: 10;
+    }
+
+    /* Crown Crest Kalasam / Finial */
+    .crown-finial {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 22px;
+      background: radial-gradient(circle at 40% 30%, #fffbeb, #f59e0b 60%, #b45309 100%);
+      clip-path: polygon(50% 0%, 100% 60%, 75% 100%, 25% 100%, 0% 60%);
+      box-shadow: 0 0 10px #fde047;
+      z-index: 12;
+    }
+
+    .crown-gem-top {
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f87171, #dc2626 70%, #7f1d1d);
+      box-shadow: 0 0 5px #ef4444;
+    }
+
+    /* Main Tiered Crown Dome */
+    .crown-top-tier {
+      position: absolute;
+      top: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 50px;
+      background: linear-gradient(180deg, #fef08a 0%, #f59e0b 35%, #d97706 70%, #92400e 100%);
+      clip-path: polygon(50% 0%, 90% 40%, 100% 100%, 0% 100%, 10% 40%);
+      border-radius: 10px 10px 0 0;
+      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8);
+      z-index: 11;
+    }
+
+    .crown-mid-tier {
+      position: absolute;
+      top: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 105px;
+      height: 38px;
+      background: linear-gradient(180deg, #fde047 0%, #f59e0b 40%, #b45309 85%, #78350f 100%);
+      border-radius: 8px 8px 0 0;
+      clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+      z-index: 10;
+    }
+
+    /* Crown Base Band & Ruby Gems */
+    .crown-base-band {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 24px;
+      background: linear-gradient(90deg, #78350f 0%, #d97706 20%, #fef08a 50%, #d97706 80%, #78350f 100%);
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 2px 2px #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      padding: 0 8px;
+      z-index: 11;
+    }
+
+    .crown-ruby {
+      width: 11px;
+      height: 11px;
+      background: radial-gradient(circle at 35% 35%, #fca5a5, #dc2626 60%, #7f1d1d 100%);
+      border-radius: 50%;
+      border: 1px solid #fef08a;
+      box-shadow: 0 0 5px rgba(220, 38, 38, 0.8);
+    }
+
+    .crown-emerald {
+      width: 14px;
+      height: 14px;
+      background: radial-gradient(circle at 35% 35%, #a7f3d0, #059669 60%, #064e3b 100%);
+      border-radius: 50%;
+      border: 1.5px solid #fef08a;
+      box-shadow: 0 0 6px rgba(5, 150, 105, 0.8);
+    }
+
+    /* Crown Ear Ornaments / Side Wings (Chevi Poovu) */
+    .crown-ear-wing-left, .crown-ear-wing-right {
+      position: absolute;
+      bottom: 2px;
+      width: 26px;
+      height: 38px;
+      background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #b45309 100%);
+      border: 1.5px solid #fffbeb;
+      border-radius: 50% 50% 10% 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      z-index: 9;
+    }
+
+    .crown-ear-wing-left {
+      left: 0;
+      transform: rotate(-25deg);
+    }
+
+    .crown-ear-wing-right {
+      right: 0;
+      transform: scaleX(-1) rotate(-25deg);
+    }
+
+    /* ----------------------------------------------------
+       MAVELI HEAD & FACE
+       ---------------------------------------------------- */
+    .maveli-head {
+      position: absolute;
+      top: 85px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 104px;
+      height: 98px;
+      background: radial-gradient(circle at 50% 35%, var(--skin-highlight) 0%, var(--skin) 55%, var(--skin-shadow) 90%, var(--skin-dark) 100%);
+      border-radius: 46% 46% 48% 48% / 40% 40% 55% 55%;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+      z-index: 8;
+    }
+
+    /* Rosy Happy Cheeks */
+    .maveli-head::before, .maveli-head::after {
+      content: "";
+      position: absolute;
+      top: 52px;
+      width: 22px;
+      height: 14px;
+      background: radial-gradient(circle, rgba(239, 68, 68, 0.35) 0%, transparent 80%);
+      border-radius: 50%;
+    }
+    .maveli-head::before { left: 10px; }
+    .maveli-head::after { right: 10px; }
+
+    /* Sandalwood Chandanakuri & Kumkum Tilak */
+    .chandan-tilak {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5px;
+      z-index: 10;
+    }
+
+    .chandan-stripe {
+      height: 2.5px;
+      background: linear-gradient(90deg, transparent 0%, #fffbeb 20%, #fef08a 50%, #fffbeb 80%, transparent 100%);
+      border-radius: 2px;
+    }
+    .cs1 { width: 34px; }
+    .cs2 { width: 40px; }
+    .cs3 { width: 30px; }
+
+    .kumkum-dot {
+      width: 7px;
+      height: 7px;
+      background: radial-gradient(circle at 35% 35%, #f87171, #dc2626 70%, #991b1b);
+      border-radius: 50%;
+      margin-top: 1px;
+      box-shadow: 0 0 4px rgba(220, 38, 38, 0.8);
+    }
+
+    /* Eyebrows */
+    .eyebrows-wrapper {
+      position: absolute;
+      top: 32px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 18px;
+    }
+
+    .eyebrow {
+      width: 26px;
+      height: 7px;
+      background: #1c1917;
+      border-radius: 50% 50% 0 0;
+      transform: rotate(6deg);
+    }
+    .eyebrow.right {
+      transform: rotate(-6deg);
+    }
+
+    /* Royal Eyes with Kohl Eyeliner */
+    .eyes-wrapper {
+      position: absolute;
+      top: 40px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .eye {
+      position: relative;
+      width: 22px;
+      height: 13px;
+      background: #ffffff;
+      border: 1.5px solid #09090b;
+      border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+      overflow: hidden;
+      box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.4);
+      animation: blink 4.5s ease-in-out infinite;
+    }
+
+    .eyeball {
+      position: absolute;
+      top: 1px;
+      left: 5px;
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle at 40% 40%, #451a03 0%, #1c1917 60%, #000 100%);
+      border-radius: 50%;
+    }
+
+    .eye-glint {
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      width: 3px;
+      height: 3px;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    /* Royal Nose */
+    .maveli-nose {
+      position: absolute;
+      top: 45px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 20px;
+      border-bottom: 3.5px solid #a84e15;
+      border-right: 2px solid rgba(168, 78, 21, 0.4);
+      border-radius: 0 0 10px 10px;
+    }
+
+    /* GRAND KERALA HANDLEBAR MUSTACHE (മീശ) */
+    .handlebar-mustache {
+      position: absolute;
+      top: 57px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 96px;
+      height: 30px;
+      z-index: 12;
+      filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.5));
+    }
+
+    .mustache-left, .mustache-right {
+      position: absolute;
+      top: 0;
+      width: 48px;
+      height: 24px;
+      background: linear-gradient(180deg, #27272a 0%, #09090b 60%, #000000 100%);
+    }
+
+    .mustache-left {
+      left: 2px;
+      border-radius: 0 100% 20% 80% / 0 100% 20% 80%;
+      transform: rotate(-8deg);
+    }
+
+    .mustache-right {
+      right: 2px;
+      border-radius: 100% 0 80% 20% / 100% 0 80% 20%;
+      transform: rotate(8deg);
+    }
+
+    /* Twirled Waxed Tips */
+    .mustache-tip-left, .mustache-tip-right {
+      position: absolute;
+      top: -6px;
+      width: 18px;
+      height: 18px;
+      border: 4.5px solid #09090b;
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+      border-radius: 50%;
+    }
+
+    .mustache-tip-left {
+      left: -8px;
+      transform: rotate(-40deg);
+    }
+
+    .mustache-tip-right {
+      right: -8px;
+      transform: scaleX(-1) rotate(-40deg);
+    }
+
+    /* Jolly Benevolent Smile */
+    .maveli-mouth {
+      position: absolute;
+      top: 73px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 14px;
+      background: radial-gradient(circle at top, #b91c1c 0%, #7f1d1d 80%);
+      border-radius: 0 0 50% 50% / 0 0 100% 100%;
+      border: 1.5px solid #7c2d12;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .maveli-teeth {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 5px;
+      background: #ffffff;
+      border-radius: 0 0 4px 4px;
+    }
+
+    /* Royal Ears & Kundalam (Gold Ruby Earrings) */
+    .maveli-ear-left, .maveli-ear-right {
+      position: absolute;
+      top: 40px;
+      width: 18px;
+      height: 28px;
+      background: var(--skin);
+      border-radius: 50%;
+      z-index: 6;
+      border: 1.5px solid var(--skin-dark);
+    }
+
+    .maveli-ear-left {
+      left: -9px;
+    }
+
+    .maveli-ear-right {
+      right: -9px;
+    }
+
+    .kundalam-earring {
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle at 35% 35%, #fffbeb, #f59e0b 50%, #78350f 100%);
+      border-radius: 50%;
+      border: 2px solid #fef08a;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .kundalam-ruby {
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle at 35% 35%, #f87171, #dc2626 70%, #7f1d1d);
+      border-radius: 50%;
+    }
+
+    /* ----------------------------------------------------
+       MAVELI TORSO, NECKLACES & PROSPERITY POTBELLY
+       ---------------------------------------------------- */
+    .maveli-body {
+      position: absolute;
+      top: 165px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 170px;
+      height: 175px;
+      z-index: 6;
+    }
+
+    /* Broad Royal Chest */
+    .maveli-chest {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 75px;
+      background: radial-gradient(circle at 50% 20%, var(--skin-highlight) 0%, var(--skin) 55%, var(--skin-shadow) 100%);
+      border-radius: 20px 20px 40px 40px;
+      box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.2);
+    }
+
+    /* Chest Sandalwood marks */
+    .chest-chandan-left, .chest-chandan-right {
+      position: absolute;
+      top: 25px;
+      width: 24px;
+      height: 6px;
+      background: linear-gradient(90deg, transparent, #fffbeb, #fef08a, transparent);
+      border-radius: 3px;
+      opacity: 0.85;
+    }
+    .chest-chandan-left { left: 16px; }
+    .chest-chandan-right { right: 16px; }
+
+    /* The Iconic Jovial Potbelly (തൊണ്ണൂറ് / കുടവയർ) */
+    .maveli-potbelly {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 168px;
+      height: 120px;
+      background: radial-gradient(circle at 50% 30%, var(--skin-highlight) 0%, var(--skin) 60%, var(--skin-shadow) 90%, var(--skin-dark) 100%);
+      border-radius: 50% 50% 45% 45% / 40% 40% 60% 60%;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), inset 0 -8px 15px rgba(0, 0, 0, 0.3);
+      z-index: 7;
+    }
+
+    /* Navel / Belly Button */
+    .potbelly-navel {
+      position: absolute;
+      top: 56px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 12px;
+      background: radial-gradient(circle at center, #5c2007 0%, #8f3d0a 70%, transparent 100%);
+      border-radius: 50%;
+      border-top: 2px solid #451a03;
+    }
+
+    /* Sacred Thread (Poonool / പൂണൂൽ) */
+    .poonool-thread {
+      position: absolute;
+      top: 2px;
+      left: 20px;
+      width: 130px;
+      height: 140px;
+      border-left: 2.5px dashed #fef08a;
+      border-radius: 50% 0 0 50% / 70% 0 0 70%;
+      transform: rotate(-15deg);
+      z-index: 10;
+      opacity: 0.9;
+      filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.4));
+    }
+
+    /* Grand Multi-Tier Gold Necklaces */
+    .necklace-choker {
+      position: absolute;
+      top: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 65px;
+      height: 30px;
+      border-bottom: 5px solid #d97706;
+      border-radius: 0 0 50% 50%;
+      z-index: 9;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .necklace-kasumala {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 95px;
+      height: 52px;
+      border-bottom: 7px dotted #f59e0b;
+      border-radius: 0 0 50% 50%;
+      z-index: 9;
+      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+    }
+
+    .necklace-navaratna {
+      position: absolute;
+      top: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 75px;
+      border-bottom: 6px solid #b45309;
+      border-radius: 0 0 50% 50%;
+      z-index: 9;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .pendant-gold {
+      width: 18px;
+      height: 22px;
+      background: radial-gradient(circle at 40% 30%, #fffbeb, #f59e0b 60%, #78350f);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      margin-bottom: -10px;
+      border: 1px solid #fff;
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.8);
+    }
+
+    /* Golden Belt (Udarabandham / അരഞ്ഞാണം) */
+    .udarabandham-belt {
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 172px;
+      height: 18px;
+      background: linear-gradient(90deg, #78350f 0%, #d97706 20%, #fef08a 50%, #d97706 80%, #78350f 100%);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), inset 0 2px 3px #fff;
+      z-index: 12;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .belt-buckle-gem {
+      width: 14px;
+      height: 14px;
+      background: radial-gradient(circle at 35% 35%, #fca5a5, #dc2626 60%, #7f1d1d 100%);
+      border-radius: 50%;
+      border: 2px solid #fef08a;
+    }
+
+    .belt-tassels {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38px;
+      height: 28px;
+      background: linear-gradient(180deg, #f59e0b, #b45309 80%, #78350f);
+      clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+      border: 1px solid #fef08a;
+    }
+
+    /* ----------------------------------------------------
+       ROYAL ARMS & GESTURES
+       ---------------------------------------------------- */
+    /* Left Arm: Holding Olakkuda */
+    .arm-left {
+      position: absolute;
+      top: 175px;
+      left: 28px;
+      width: 50px;
+      height: 120px;
+      z-index: 5;
+    }
+
+    .shoulder-left {
+      position: absolute;
+      top: 0;
+      left: 10px;
+      width: 42px;
+      height: 48px;
+      background: var(--skin);
+      border-radius: 50% 50% 30% 30%;
+      box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.2);
+    }
+
+    .forearm-left {
+      position: absolute;
+      top: 36px;
+      left: 0;
+      width: 32px;
+      height: 75px;
+      background: linear-gradient(135deg, var(--skin) 0%, var(--skin-shadow) 100%);
+      border-radius: 16px;
+      transform: rotate(28deg);
+      transform-origin: top center;
+    }
+
+    .hand-left-grip {
+      position: absolute;
+      bottom: 2px;
+      left: 4px;
+      width: 26px;
+      height: 26px;
+      background: var(--skin);
+      border-radius: 50%;
+      border: 1.5px solid var(--skin-dark);
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Right Arm: Abhaya Mudra (Blessing Pose) */
+    .arm-right {
+      position: absolute;
+      top: 165px;
+      right: 25px;
+      width: 60px;
+      height: 135px;
+      z-index: 8;
+      animation: blessing-float 4s ease-in-out infinite alternate;
+    }
+
+    .shoulder-right {
+      position: absolute;
+      top: 5px;
+      right: 15px;
+      width: 44px;
+      height: 48px;
+      background: var(--skin);
+      border-radius: 50% 50% 30% 30%;
+    }
+
+    .forearm-right {
+      position: absolute;
+      top: 35px;
+      right: 6px;
+      width: 34px;
+      height: 65px;
+      background: linear-gradient(225deg, var(--skin) 0%, var(--skin-shadow) 100%);
+      border-radius: 16px;
+      transform: rotate(-35deg);
+      transform-origin: top center;
+    }
+
+    /* Abhaya Mudra Hand */
+    .hand-right-abhaya {
+      position: absolute;
+      top: -12px;
+      right: -8px;
+      width: 38px;
+      height: 46px;
+      background: radial-gradient(circle at 40% 50%, var(--skin-highlight) 0%, var(--skin) 70%, var(--skin-shadow) 100%);
+      border-radius: 12px 18px 20px 14px;
+      border: 1.5px solid var(--skin-dark);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+      transform: rotate(5deg);
+      z-index: 12;
+    }
+
+    /* Palm Blessing Radiance & Fingers */
+    .palm-fingers {
+      position: absolute;
+      top: -10px;
+      left: 6px;
+      display: flex;
+      gap: 2px;
+    }
+
+    .finger {
+      width: 6px;
+      height: 16px;
+      background: var(--skin);
+      border: 1px solid var(--skin-dark);
+      border-radius: 4px 4px 0 0;
+    }
+    .f-thumb {
+      position: absolute;
+      left: -5px;
+      top: 14px;
+      width: 8px;
+      height: 16px;
+      background: var(--skin);
+      border: 1px solid var(--skin-dark);
+      border-radius: 6px 0 0 6px;
+      transform: rotate(-35deg);
+    }
+
+    .palm-blessing-glow {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(254, 240, 138, 0.6) 0%, transparent 70%);
+      animation: pulse-aura 3s ease-in-out infinite alternate;
+    }
+
+    /* Golden Armlets (Vanki / Baajuband) & Bangles (Kadakam) */
+    .gold-vanki {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 36px;
+      height: 10px;
+      background: linear-gradient(90deg, #78350f, #f59e0b, #fffbeb, #d97706, #78350f);
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      z-index: 10;
+    }
+
+    .gold-kadakam {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 10px;
+      background: linear-gradient(90deg, #78350f, #fbbf24, #fffbeb, #d97706, #78350f);
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      z-index: 11;
+    }
+
+    /* Royal Crimson Silk Melmundu / Angavastram draped over shoulder */
+    .royal-melmundu {
+      position: absolute;
+      top: 165px;
+      left: 70px;
+      width: 38px;
+      height: 140px;
+      background: linear-gradient(135deg, #b91c1c 0%, #dc2626 50%, #991b1b 100%);
+      border-left: 3px solid #fef08a;
+      border-right: 3px solid #fef08a;
+      border-radius: 8px;
+      transform: rotate(-10deg);
+      box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.4);
+      z-index: 9;
+    }
+
+    /* ----------------------------------------------------
+       KASAVU MUNDU (Traditional Kerala Gold-Bordered Dhoti)
+       ---------------------------------------------------- */
+    .maveli-mundu-skirt {
+      position: absolute;
+      top: 310px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 190px;
+      height: 120px;
+      background: linear-gradient(180deg, var(--kasavu-cream) 0%, #fef3c7 70%, #fde68a 100%);
+      clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+      border-radius: 6px 6px 16px 16px;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+      z-index: 6;
+      overflow: hidden;
+    }
+
+    /* Authentic Kerala Kasavu Gold Zari Borders */
+    .kasavu-gold-border-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      background: linear-gradient(90deg, #78350f 0%, #d97706 15%, #fef08a 35%, #f59e0b 50%, #fef08a 65%, #d97706 85%, #78350f 100%);
+      border-top: 2px solid #fff;
+      box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .kasavu-border-accent {
+      position: absolute;
+      bottom: 24px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #d97706;
+    }
+
+    /* Pleated Njerivu Folds */
+    .mundu-pleats-center {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.08) 0%, transparent 30%, rgba(0, 0, 0, 0.12) 50%, transparent 70%, rgba(0, 0, 0, 0.08) 100%);
+      border-left: 2px solid rgba(217, 119, 6, 0.5);
+      border-right: 2px solid rgba(217, 119, 6, 0.5);
+    }
+
+    /* ----------------------------------------------------
+       FEET, PADUKAM (SANDALS) & LOTUS PEDESTAL
+       ---------------------------------------------------- */
+    .maveli-feet-wrapper {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 32px;
+      z-index: 7;
+    }
+
+    .foot-padukam {
+      position: relative;
+      width: 44px;
+      height: 18px;
+      background: #78350f;
+      border-radius: 12px 16px 8px 8px;
+      border: 1.5px solid #d97706;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .padukam-knob {
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle, #fef08a, #d97706);
+      border-radius: 50%;
+      border: 1px solid #fff;
+    }
+
+    .anklet-kolusu {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 5px;
+      background: repeating-linear-gradient(90deg, #fde047 0, #fde047 3px, #b45309 3px, #b45309 5px);
+      border-radius: 2px;
+    }
+
+    /* Golden Lotus Pedestal (Padma Peedam) */
+    .lotus-pedestal {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 240px;
+      height: 32px;
+      background: linear-gradient(180deg, #f59e0b 0%, #d97706 60%, #78350f 100%);
+      border-radius: 50% 50% 20% 20% / 100% 100% 20% 20%;
+      border: 2px solid #fef08a;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), inset 0 2px 4px #fff;
+      z-index: 4;
+      display: flex;
+      justify-content: space-around;
+      padding: 0 15px;
+      overflow: hidden;
+    }
+
+    .pedestal-petal {
+      width: 22px;
+      height: 18px;
+      background: radial-gradient(circle at center, #f472b6 0%, #db2777 60%, #9d174d 100%);
+      clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    /* ==========================================================================
+       NILAVILAKKU (TRADITIONAL KERALA BRASS OIL LAMP)
+       ========================================================================== */
+    .nilavilakku-lamp {
+      position: relative;
+      width: 90px;
+      height: 340px;
+      z-index: 6;
+      margin: 0 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Flickering Lamp Aura */
+    .lamp-aura-glow {
+      position: absolute;
+      top: -15px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--lamp-glow) 0%, rgba(245, 158, 11, 0.15) 50%, transparent 70%);
+      pointer-events: none;
+      animation: flicker-aura 3s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+
+    /* Crown finial of lamp (Prabha) */
+    .lamp-prabha-crest {
+      width: 18px;
+      height: 24px;
+      background: radial-gradient(circle at 40% 30%, #fffbeb, #f59e0b 60%, #78350f 100%);
+      clip-path: polygon(50% 0%, 100% 70%, 75% 100%, 25% 100%, 0% 70%);
+      border: 1px solid #fef08a;
+      z-index: 3;
+    }
+
+    /* Upper Flame & Oil Basin */
+    .lamp-flame-container {
+      position: relative;
+      width: 70px;
+      height: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0 6px;
+      z-index: 4;
+      margin-top: -6px;
+    }
+
+    .lamp-flame {
+      width: 10px;
+      height: 18px;
+      background: radial-gradient(ellipse at bottom, #ffffff 0%, #fef08a 25%, #f59e0b 60%, #dc2626 90%, transparent 100%);
+      border-radius: 50% 50% 35% 35% / 80% 80% 20% 20%;
+      filter: drop-shadow(0 0 6px #f59e0b);
+      animation: flicker-flame 1.5s ease-in-out infinite alternate;
+      transform-origin: bottom center;
+    }
+
+    .f-mid {
+      height: 22px;
+      width: 12px;
+      animation-delay: 0.3s;
+    }
+
+    .f-left { animation-delay: 0.6s; transform: rotate(-8deg); }
+    .f-right { animation-delay: 0.1s; transform: rotate(8deg); }
+
+    .lamp-oil-basin {
+      width: 76px;
+      height: 16px;
+      background: linear-gradient(180deg, #fef08a 0%, #d97706 60%, #78350f 100%);
+      border-radius: 0 0 50% 50% / 0 0 100% 100%;
+      border: 1.5px solid #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      z-index: 3;
+    }
+
+    /* Slender Brass Pillar */
+    .lamp-stem {
+      width: 16px;
+      height: 190px;
+      background: linear-gradient(90deg, #78350f 0%, #d97706 20%, #fef08a 50%, #d97706 80%, #78350f 100%);
+      border-radius: 3px;
+      box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    .lamp-stem-ring {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 26px;
+      height: 10px;
+      background: radial-gradient(circle at 40% 30%, #fffbeb, #f59e0b 60%, #78350f);
+      border-radius: 5px;
+      border: 1px solid #fef08a;
+    }
+    .r1 { top: 40px; }
+    .r2 { top: 95px; }
+    .r3 { top: 145px; }
+
+    /* Heavy Tiered Brass Base */
+    .lamp-base-pedestal {
+      width: 86px;
+      height: 48px;
+      background: linear-gradient(180deg, #f59e0b 0%, #d97706 40%, #78350f 90%, #451a03 100%);
+      clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+      border-radius: 0 0 8px 8px;
+      border-bottom: 4px solid #fef08a;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+      z-index: 3;
+    }
+
+    /* ==========================================================================
+       RIGHT FLANK: ONATHAPPAN (THRIKKAKARA APPAN) & FESTIVE SADYA OFFERING
+       ========================================================================== */
+    .festive-offering-side {
+      position: relative;
+      width: 90px;
+      height: 260px;
+      z-index: 6;
+      margin: 0 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    /* Clay Pyramid Idol: Onathappan */
+    .onathappan-idol {
+      position: relative;
+      width: 44px;
+      height: 52px;
+      background: linear-gradient(180deg, #a16207 0%, #78350f 70%, #451a03 100%);
+      clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+      border-radius: 4px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      padding: 6px 0;
+    }
+
+    .thrikkakara-flower {
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #facc15, #ea580c);
+      border-radius: 50%;
+      border: 1px solid #fff;
+    }
+
+    /* Bronze Uruli with Floating Flowers */
+    .uruli-vessel {
+      position: relative;
+      width: 80px;
+      height: 28px;
+      background: linear-gradient(180deg, #fef08a 0%, #b45309 60%, #451a03 100%);
+      border-radius: 0 0 50% 50% / 0 0 100% 100%;
+      border: 2px solid #fde047;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      margin-top: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      padding: 0 8px;
+    }
+
+    .uruli-water {
+      position: absolute;
+      inset: 0;
+      background: rgba(14, 165, 233, 0.35);
+    }
+
+    .uruli-petal {
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #f472b6, #db2777);
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    /* Festive Plantain Leaf (Vazhayila) */
+    .plantain-leaf-mini {
+      position: relative;
+      width: 84px;
+      height: 24px;
+      background: linear-gradient(90deg, #15803d 0%, #22c55e 50%, #166534 100%);
+      border-radius: 50% 50% 40% 40% / 80% 80% 20% 20%;
+      border: 1px solid #86efac;
+      margin-top: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .payasam-bowl {
+      width: 18px;
+      height: 12px;
+      background: radial-gradient(circle at 40% 30%, #fef08a, #d97706);
+      border-radius: 0 0 50% 50%;
+      border: 1px solid #fff;
+    }
+
+    .banana-nendran {
+      width: 14px;
+      height: 6px;
+      background: #facc15;
+      border-radius: 10px;
+      transform: rotate(-15deg);
+    }
+
+    /* ==========================================================================
+       POOKKALAM (CONCENTRIC FLORAL RANGOLI CARPET)
+       ========================================================================== */
+    .pookkalam-section {
+      position: relative;
+      margin-top: -30px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 700px;
+      z-index: 4;
+    }
+
+    .pookkalam-disc {
+      position: relative;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      transform: rotateX(60deg);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(245, 158, 11, 0.35);
+      animation: spin-pookkalam 60s linear infinite;
+      transition: transform 0.5s ease;
+    }
+
+    .pookkalam-disc:hover {
+      animation-play-state: paused;
+    }
+
+    /* Outer Ring: Thumba White & Orange Marigold */
+    .pookkalam-ring-outer {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: 
+        repeating-conic-gradient(from 0deg, 
+          #ea580c 0deg 11.25deg, 
+          #facc15 11.25deg 22.5deg,
+          #ffffff 22.5deg 33.75deg,
+          #db2777 33.75deg 45deg
+        );
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 15px rgba(250, 204, 21, 0.6);
+      border: 4px solid #fef08a;
+    }
+
+    /* Second Ring: Chemparathi (Red Hibiscus) & Green Leaves */
+    .pookkalam-ring-mid1 {
+      position: absolute;
+      inset: 32px;
+      border-radius: 50%;
+      background: 
+        repeating-conic-gradient(from 5deg, 
+          #dc2626 0deg 15deg, 
+          #15803d 15deg 30deg, 
+          #f59e0b 30deg 45deg,
+          #831843 45deg 60deg
+        );
+      border: 3px solid #fffbeb;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Third Ring: Golden Marigold Geometrics */
+    .pookkalam-ring-mid2 {
+      position: absolute;
+      inset: 68px;
+      border-radius: 50%;
+      background: 
+        repeating-conic-gradient(from 0deg, 
+          #fde047 0deg 22.5deg, 
+          #c2410c 22.5deg 45deg
+        );
+      border: 3px solid #f59e0b;
+    }
+
+    /* Inner Floral Lotus Center */
+    .pookkalam-center-lotus {
+      position: absolute;
+      inset: 108px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fef08a 0%, #ea580c 50%, #831843 85%, #451a03 100%);
+      border: 3px solid #ffffff;
+      box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.6), 0 0 10px #f59e0b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pookkalam-center-bud {
+      width: 32px;
+      height: 32px;
+      background: radial-gradient(circle at 35% 35%, #fff, #f43f5e 50%, #881337 100%);
+      border-radius: 50%;
+      border: 2px solid #fef08a;
+      box-shadow: 0 0 8px rgba(244, 63, 94, 0.8);
+    }
+
+    /* ==========================================================================
+       FALLING MARIGOLD PETALS (PURE CSS KEYFRAME RAIN)
+       ========================================================================== */
+    .petal-rain {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 15;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      top: -30px;
+      width: 14px;
+      height: 10px;
+      background: radial-gradient(circle at 35% 35%, #fde047, #ea580c 70%, #9a3412 100%);
+      border-radius: 50% 50% 20% 50%;
+      opacity: 0.85;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+      animation: drift-fall 8s linear infinite;
+    }
+
+    .p1  { left: 8%;  animation-duration: 6.5s; animation-delay: 0s;   transform: scale(0.9); }
+    .p2  { left: 22%; animation-duration: 8.2s; animation-delay: 1.5s; transform: scale(1.1); }
+    .p3  { left: 38%; animation-duration: 7.1s; animation-delay: 3.2s; transform: scale(0.8); }
+    .p4  { left: 54%; animation-duration: 9.0s; animation-delay: 0.8s; transform: scale(1.2); }
+    .p5  { left: 68%; animation-duration: 7.6s; animation-delay: 2.1s; transform: scale(1.0); }
+    .p6  { left: 82%; animation-duration: 8.7s; animation-delay: 4.0s; transform: scale(0.9); }
+    .p7  { left: 92%; animation-duration: 6.8s; animation-delay: 1.2s; transform: scale(1.1); }
+    .p8  { left: 15%; animation-duration: 9.5s; animation-delay: 5.0s; transform: scale(0.7); }
+    .p9  { left: 45%; animation-duration: 7.9s; animation-delay: 4.4s; transform: scale(1.0); }
+    .p10 { left: 75%; animation-duration: 8.4s; animation-delay: 2.8s; transform: scale(0.85); }
+
+    /* ==========================================================================
+       MAVELI LEGEND / STORY MODAL (PURE CSS :CHECKED MODAL HACK)
+       ========================================================================== */
+    .story-modal-toggle {
+      display: none;
+    }
+
+    .story-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    #toggle-story:checked ~ .story-modal-backdrop {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .story-card {
+      background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%);
+      border: 2px solid #f59e0b;
+      border-radius: 20px;
+      padding: 28px;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(245, 158, 11, 0.4);
+      color: #fef3c7;
+      transform: translateY(20px);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    #toggle-story:checked ~ .story-modal-backdrop .story-card {
+      transform: translateY(0);
+    }
+
+    .story-card h2 {
+      font-size: 22px;
+      color: #fde047;
+      margin-bottom: 12px;
+      text-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+    }
+
+    .story-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      color: #fef9c3;
+    }
+
+    .story-card .malayalam-verse {
+      font-size: 15px;
+      font-style: italic;
+      color: #fef08a;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 14px;
+      border-left: 3px solid #f59e0b;
+      border-radius: 0 8px 8px 0;
+      margin: 12px 0;
+    }
+
+    .close-story-btn {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 8px 22px;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #451a03;
+      font-weight: 800;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 9999px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+      border: 1px solid #fef08a;
+    }
+
+    /* Footer Credits & Pure CSS Badge */
+    .app-footer {
+      position: relative;
+      z-index: 10;
+      margin-top: 30px;
+      text-align: center;
+      padding: 12px 20px;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: #fef08a;
+      opacity: 0.85;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 9999px;
+      border: 1px solid rgba(251, 191, 36, 0.2);
+    }
+
+    /* ==========================================================================
+       FESTIVE CRACKERS & SPARKLES (PURE CSS ART & PERIODIC ANIMATIONS)
+       ========================================================================== */
+    .crackers-sky {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      overflow: hidden;
+    }
+
+    /* Cracker Burst Placement */
+    .cracker-burst {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+
+    .cb-1 { top: 20%; left: 18%; animation: firework-cycle-1 6.2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite; animation-delay: 0.3s; }
+    .cb-2 { top: 15%; left: 82%; animation: firework-cycle-2 6.8s cubic-bezier(0.1, 0.8, 0.3, 1) infinite; animation-delay: 2.1s; }
+    .cb-3 { top: 28%; left: 50%; animation: firework-cycle-3 6.5s cubic-bezier(0.1, 0.8, 0.3, 1) infinite; animation-delay: 3.8s; }
+    .cb-4 { top: 24%; left: 32%; animation: firework-cycle-1 7.0s cubic-bezier(0.1, 0.8, 0.3, 1) infinite; animation-delay: 5.2s; }
+    .cb-5 { top: 26%; left: 70%; animation: firework-cycle-2 6.0s cubic-bezier(0.1, 0.8, 0.3, 1) infinite; animation-delay: 3.2s; }
+
+    /* Core flash of the firework */
+    .burst-center-flash {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 18px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffffff 0%, #fef08a 45%, transparent 80%);
+      box-shadow: 0 0 16px #facc15;
+    }
+
+    /* Radiating Starburst Spikes (Pure CSS Conic & Box-Shadow Patterns) */
+    .burst-star-cross {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100px;
+      height: 100px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+
+    .burst-gold .burst-star-cross {
+      background: 
+        radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, transparent 12%),
+        repeating-conic-gradient(from 0deg, #fde047 0deg 4deg, transparent 4deg 30deg);
+      box-shadow: 
+        0 -38px 8px -4px #fbbf24,
+        0 38px 8px -4px #f59e0b,
+        -38px 0 8px -4px #facc15,
+        38px 0 8px -4px #ea580c,
+        -26px -26px 6px -3px #ffffff,
+        26px 26px 6px -3px #fef08a,
+        -26px 26px 6px -3px #d97706,
+        26px -26px 6px -3px #f59e0b;
+    }
+
+    .burst-ruby .burst-star-cross {
+      background: 
+        radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, transparent 12%),
+        repeating-conic-gradient(from 15deg, #f43f5e 0deg 4deg, transparent 4deg 30deg);
+      box-shadow: 
+        0 -38px 8px -4px #e11d48,
+        0 38px 8px -4px #fb7185,
+        -38px 0 8px -4px #f43f5e,
+        38px 0 8px -4px #fda4af,
+        -26px -26px 6px -3px #ffffff,
+        26px 26px 6px -3px #f43f5e,
+        -26px 26px 6px -3px #be123c,
+        26px -26px 6px -3px #fda4af;
+    }
+
+    .burst-emerald .burst-star-cross {
+      background: 
+        radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, transparent 12%),
+        repeating-conic-gradient(from 8deg, #34d399 0deg 4deg, transparent 4deg 30deg);
+      box-shadow: 
+        0 -38px 8px -4px #10b981,
+        0 38px 8px -4px #6ee7b7,
+        -38px 0 8px -4px #059669,
+        38px 0 8px -4px #a7f3d0,
+        -26px -26px 6px -3px #ffffff,
+        26px 26px 6px -3px #34d399,
+        -26px 26px 6px -3px #047857,
+        26px -26px 6px -3px #6ee7b7;
+    }
+
+    /* Expanding Halo Shockwave Ring */
+    .burst-ring {
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 2px dotted rgba(254, 240, 138, 0.85);
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.55);
+    }
+
+    /* Rising Cracker Rocket Trail */
+    .ascent-rocket-spark {
+      position: absolute;
+      width: 2.5px;
+      height: 40px;
+      background: linear-gradient(180deg, #ffffff 0%, #f59e0b 50%, transparent 100%);
+      border-radius: 2px;
+      box-shadow: 0 0 10px #fbbf24;
+      opacity: 0;
+    }
+
+    .cb-1 .ascent-rocket-spark { left: 50%; bottom: -45px; animation: rocket-ascent 6.2s ease-out infinite; animation-delay: 0.3s; }
+    .cb-2 .ascent-rocket-spark { left: 50%; bottom: -45px; animation: rocket-ascent 6.8s ease-out infinite; animation-delay: 2.1s; }
+    .cb-3 .ascent-rocket-spark { left: 50%; bottom: -45px; animation: rocket-ascent 6.5s ease-out infinite; animation-delay: 3.8s; }
+
+    /* Ground Flowerpot (Pookkutty / Nilachakram) Festive Sparkler Fountains */
+    .sparkler-fountain-left, .sparkler-fountain-right {
+      position: absolute;
+      bottom: 85px;
+      width: 36px;
+      height: 110px;
+      z-index: 3;
+    }
+
+    .sparkler-fountain-left {
+      left: 8%;
+    }
+
+    .sparkler-fountain-right {
+      right: 8%;
+    }
+
+    .fountain-cone-pot {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 26px;
+      background: linear-gradient(180deg, #d97706 0%, #78350f 70%, #451a03 100%);
+      clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+      border-top: 2px solid #fef08a;
+    }
+
+    .fountain-spark-plume {
+      position: absolute;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 85px;
+      background: radial-gradient(ellipse at bottom, rgba(255,255,255,0.95) 0%, rgba(251,191,36,0.8) 35%, rgba(234,88,12,0.4) 70%, transparent 100%);
+      clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+      animation: fountain-spew 0.75s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 8px #facc15);
+    }
+
+    /* Ambient Periodic Twinkling Sparkles */
+    .twinkle-star-sparkle {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: radial-gradient(circle, #ffffff 15%, #fef08a 40%, transparent 70%);
+      clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
+      animation: twinkle-sparkle-pulse 3.2s ease-in-out infinite;
+    }
+
+    .ts-1 { top: 10%; left: 22%; animation-delay: 0.2s; animation-duration: 2.8s; }
+    .ts-2 { top: 22%; left: 88%; animation-delay: 1.4s; animation-duration: 3.2s; }
+    .ts-3 { top: 8%;  left: 62%; animation-delay: 2.1s; animation-duration: 2.5s; }
+    .ts-4 { top: 32%; left: 8%;  animation-delay: 0.9s; animation-duration: 3.5s; }
+    .ts-5 { top: 30%; left: 78%; animation-delay: 1.7s; animation-duration: 2.9s; }
+
+    /* ==========================================================================
+       PURE CSS KEYFRAME ANIMATIONS
+       ========================================================================== */
+    @keyframes rotate-rays {
+      from { transform: translateX(-50%) rotate(0deg); }
+      to { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    @keyframes pulse-aura {
+      0% { transform: scale(0.95); opacity: 0.7; }
+      100% { transform: scale(1.05); opacity: 1; }
+    }
+
+    @keyframes umbrella-sway {
+      0% { transform: rotate(-10deg); }
+      100% { transform: rotate(-5deg); }
+    }
+
+    @keyframes blessing-float {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-4px) rotate(2deg); }
+    }
+
+    @keyframes blink {
+      0%, 96%, 100% { transform: scaleY(1); }
+      98% { transform: scaleY(0.1); }
+    }
+
+    @keyframes flicker-flame {
+      0% { transform: scale(0.92) skewX(-2deg); opacity: 0.9; }
+      50% { transform: scale(1.05) skewX(2deg); opacity: 1; filter: drop-shadow(0 0 9px #fbbf24); }
+      100% { transform: scale(0.98) skewX(-1deg); opacity: 0.95; }
+    }
+
+    @keyframes flicker-aura {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      100% { transform: scale(1.1); opacity: 0.9; }
+    }
+
+    @keyframes spin-pookkalam {
+      from { transform: rotateX(60deg) rotate(0deg); }
+      to { transform: rotateX(60deg) rotate(360deg); }
+    }
+
+    @keyframes drift-fall {
+      0% {
+        top: -30px;
+        transform: translateX(0px) rotate(0deg) scale(0.9);
+      }
+      50% {
+        transform: translateX(35px) rotate(180deg) scale(1);
+      }
+      100% {
+        top: 105vh;
+        transform: translateX(-25px) rotate(360deg) scale(0.85);
+      }
+    }
+
+    @keyframes gentle-bob {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-4px); }
+    }
+
+    @keyframes firework-cycle-1 {
+      0%, 12% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.1);
+      }
+      14% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.65);
+      }
+      20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.15);
+      }
+      28% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.3) translateY(8px);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.1);
+      }
+    }
+
+    @keyframes firework-cycle-2 {
+      0%, 15% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
+      }
+      17% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.7) rotate(15deg);
+      }
+      24% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2) rotate(35deg);
+      }
+      32% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.35) rotate(50deg) translateY(10px);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.1);
+      }
+    }
+
+    @keyframes firework-cycle-3 {
+      0%, 10% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
+      }
+      12% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.65) rotate(-10deg);
+      }
+      19% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.18) rotate(-25deg);
+      }
+      27% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.3) rotate(-40deg) translateY(8px);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.1);
+      }
+    }
+
+    @keyframes rocket-ascent {
+      0%, 5% {
+        opacity: 0;
+        transform: translateY(35px) scaleY(0.2);
+      }
+      8% {
+        opacity: 1;
+        transform: translateY(0px) scaleY(1.2);
+      }
+      12% {
+        opacity: 0.8;
+        transform: translateY(-45px) scaleY(0.6);
+      }
+      14% {
+        opacity: 0;
+        transform: translateY(-65px) scaleY(0.1);
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes fountain-spew {
+      0% {
+        transform: translateX(-50%) scaleY(0.85) scaleX(0.9);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translateX(-50%) scaleY(1.15) scaleX(1.1) skewX(2deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-50%) scaleY(0.95) scaleX(0.95) skewX(-2deg);
+        opacity: 0.85;
+      }
+    }
+
+    @keyframes twinkle-sparkle-pulse {
+      0%, 100% {
+        transform: scale(0.4) rotate(0deg);
+        opacity: 0.25;
+      }
+      50% {
+        transform: scale(1.2) rotate(45deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 6px #fff);
+      }
+    }
+
+    /* Responsive Tweaks */
+    @media (max-width: 640px) {
+      .greeting-header {
+        padding: 14px 18px;
+      }
+      .malayalam-title {
+        font-size: 24px;
+      }
+      .english-title {
+        font-size: 16px;
+      }
+      .maveli-figure {
+        transform: scale(0.85);
+        margin-bottom: -30px;
+      }
+      .nilavilakku-lamp {
+        transform: scale(0.8);
+        margin: 0 -10px;
+      }
+      .festive-offering-side {
+        transform: scale(0.8);
+        margin: 0 -10px;
+      }
+      .pookkalam-disc {
+        width: 300px;
+        height: 300px;
+      }
+      .controls-toolbar {
+        max-width: 95vw;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PURE CSS INTERACTION CONTROLS (Hidden Radio & Checkbox States) -->
+  <input type="radio" name="time-mode" id="mode-twilight" class="css-control-input" checked />
+  <input type="radio" name="time-mode" id="mode-day" class="css-control-input" />
+  <input type="radio" name="time-mode" id="mode-night" class="css-control-input" />
+  <input type="checkbox" id="toggle-petals" class="css-control-input" checked />
+  <input type="checkbox" id="toggle-crackers" class="css-control-input" checked />
+  <input type="checkbox" id="toggle-umbrella" class="css-control-input" />
+  <input type="checkbox" id="toggle-story" class="css-control-input" />
+
+  <!-- Fixed Interactive Floating Toolbar -->
+  <nav class="controls-toolbar" aria-label="Ambiance & Controls">
+    <label for="mode-twilight" class="ctrl-btn" title="Royal Sunset Twilight">🌅 Twilight</label>
+    <label for="mode-day" class="ctrl-btn" title="Kerala Morning Light">☀️ Daylight</label>
+    <label for="mode-night" class="ctrl-btn" title="Temple Night Lights">🌌 Night</label>
+    <div class="ctrl-divider"></div>
+    <label for="toggle-petals" class="ctrl-btn" title="Toggle Falling Marigolds">🌸 Petals</label>
+    <label for="toggle-crackers" class="ctrl-btn" title="Toggle Festive Crackers & Sparkles">✨ Crackers</label>
+    <label for="toggle-umbrella" class="ctrl-btn" title="Tilt Maveli's Olakkuda">☂️ Tilt Umbrella</label>
+    <div class="ctrl-divider"></div>
+    <label for="toggle-story" class="ctrl-btn" title="Read Maveli's Legend">📜 Legend</label>
+  </nav>
+
+  <!-- Main Canvas -->
+  <main class="app-canvas">
+
+    <!-- Scenic Silhouette Backdrop -->
+    <div class="scenery-backdrop">
+      <div class="celestial-orb"></div>
+      
+      <!-- Left Coconut Palm -->
+      <div class="palm-left">
+        <div class="palm-trunk"></div>
+        <div class="palm-frond f1"></div>
+        <div class="palm-frond f2"></div>
+        <div class="palm-frond f3"></div>
+        <div class="palm-frond f4"></div>
+        <div class="palm-frond f5"></div>
+      </div>
+
+      <!-- Right Coconut Palm -->
+      <div class="palm-right">
+        <div class="palm-trunk"></div>
+        <div class="palm-frond f1"></div>
+        <div class="palm-frond f2"></div>
+        <div class="palm-frond f3"></div>
+        <div class="palm-frond f4"></div>
+        <div class="palm-frond f5"></div>
+      </div>
+
+      <!-- Snake Boat Silhouette -->
+      <div class="snake-boat"></div>
+      <div class="boat-rowers"></div>
+    </div>
+
+    <!-- Festive Greeting Banner -->
+    <header class="greeting-header">
+      <div class="sub-greeting">ഹാപ്പി ഓണം • KERALA FESTIVAL OF JOY</div>
+      <div class="temple-border-decor"></div>
+      <h1 class="malayalam-title">ഹൃദയം നിറഞ്ഞ ഓണാശംസകൾ!</h1>
+      <div class="english-title">HAPPY ONAM</div>
+      <p class="wish-caption">Welcoming King Mahabali with Prosperity, Peace & Harmony</p>
+      <div class="temple-border-decor"></div>
+    </header>
+
+    <!-- Center Stage: Maveli & Flanking Offerings -->
+    <div class="stage-container">
+      <div class="flank-elements-wrapper">
+
+        <!-- Left: Nilavilakku (Traditional Kerala Brass Lamp) -->
+        <aside class="nilavilakku-lamp" title="Nilavilakku — Sacred Brass Lamp">
+          <div class="lamp-aura-glow"></div>
+          <div class="lamp-prabha-crest"></div>
+          <div class="lamp-flame-container">
+            <div class="lamp-flame f-left"></div>
+            <div class="lamp-flame f-mid"></div>
+            <div class="lamp-flame f-right"></div>
+          </div>
+          <div class="lamp-oil-basin"></div>
+          <div class="lamp-stem">
+            <div class="lamp-stem-ring r1"></div>
+            <div class="lamp-stem-ring r2"></div>
+            <div class="lamp-stem-ring r3"></div>
+          </div>
+          <div class="lamp-base-pedestal"></div>
+        </aside>
+
+        <!-- Center: King Mahabali (Maveli) Pure CSS Artwork -->
+        <article class="maveli-figure" title="King Mahabali (Maveli) — King of Kerala">
+          <!-- Royal Aura -->
+          <div class="maveli-aura">
+            <div class="aura-rays"></div>
+          </div>
+
+          <!-- Olakkuda (Palm-Leaf Umbrella) -->
+          <div class="olakkuda">
+            <div class="olakkuda-canopy">
+              <div class="olakkuda-ribs"></div>
+              <div class="olakkuda-rim-fringe"></div>
+              <div class="olakkuda-cap"></div>
+            </div>
+            <div class="olakkuda-handle"></div>
+          </div>
+
+          <!-- Kireedam (Crown) -->
+          <div class="kireedam-crown">
+            <div class="crown-finial">
+              <div class="crown-gem-top"></div>
+            </div>
+            <div class="crown-top-tier"></div>
+            <div class="crown-mid-tier"></div>
+            <div class="crown-base-band">
+              <div class="crown-ruby"></div>
+              <div class="crown-emerald"></div>
+              <div class="crown-ruby"></div>
+              <div class="crown-emerald"></div>
+              <div class="crown-ruby"></div>
+            </div>
+            <div class="crown-ear-wing-left"></div>
+            <div class="crown-ear-wing-right"></div>
+          </div>
+
+          <!-- Maveli Head & Expressive Facial Features -->
+          <div class="maveli-head">
+            <!-- Sandalwood Chandanakuri & Kumkum -->
+            <div class="chandan-tilak">
+              <div class="chandan-stripe cs1"></div>
+              <div class="chandan-stripe cs2"></div>
+              <div class="chandan-stripe cs3"></div>
+              <div class="kumkum-dot"></div>
+            </div>
+
+            <!-- Eyebrows -->
+            <div class="eyebrows-wrapper">
+              <div class="eyebrow left"></div>
+              <div class="eyebrow right"></div>
+            </div>
+
+            <!-- Kohl Eyeliner Eyes -->
+            <div class="eyes-wrapper">
+              <div class="eye">
+                <div class="eyeball">
+                  <div class="eye-glint"></div>
+                </div>
+              </div>
+              <div class="eye">
+                <div class="eyeball">
+                  <div class="eye-glint"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Royal Nose -->
+            <div class="maveli-nose"></div>
+
+            <!-- Handlebar Mustache (മീശ) -->
+            <div class="handlebar-mustache">
+              <div class="mustache-left"></div>
+              <div class="mustache-right"></div>
+              <div class="mustache-tip-left"></div>
+              <div class="mustache-tip-right"></div>
+            </div>
+
+            <!-- Benevolent Smile -->
+            <div class="maveli-mouth">
+              <div class="maveli-teeth"></div>
+            </div>
+
+            <!-- Ears & Kundalam Ornaments -->
+            <div class="maveli-ear-left">
+              <div class="kundalam-earring">
+                <div class="kundalam-ruby"></div>
+              </div>
+            </div>
+            <div class="maveli-ear-right">
+              <div class="kundalam-earring">
+                <div class="kundalam-ruby"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Royal Torso, Necklaces & Potbelly -->
+          <div class="maveli-body">
+            <div class="maveli-chest">
+              <div class="chest-chandan-left"></div>
+              <div class="chest-chandan-right"></div>
+            </div>
+            <div class="maveli-potbelly">
+              <div class="potbelly-navel"></div>
+            </div>
+
+            <!-- Sacred Thread (Poonool) -->
+            <div class="poonool-thread"></div>
+
+            <!-- Golden Necklaces -->
+            <div class="necklace-choker"></div>
+            <div class="necklace-kasumala"></div>
+            <div class="necklace-navaratna">
+              <div class="pendant-gold"></div>
+            </div>
+
+            <!-- Golden Belt (Udarabandham) -->
+            <div class="udarabandham-belt">
+              <div class="belt-buckle-gem"></div>
+              <div class="belt-tassels"></div>
+            </div>
+          </div>
+
+          <!-- Left Arm Holding Olakkuda -->
+          <div class="arm-left">
+            <div class="shoulder-left"></div>
+            <div class="forearm-left">
+              <div class="gold-vanki"></div>
+              <div class="gold-kadakam"></div>
+              <div class="hand-left-grip"></div>
+            </div>
+          </div>
+
+          <!-- Right Arm in Abhaya Mudra (Blessing Pose) -->
+          <div class="arm-right">
+            <div class="shoulder-right"></div>
+            <div class="forearm-right">
+              <div class="gold-vanki"></div>
+              <div class="gold-kadakam"></div>
+              <div class="hand-right-abhaya">
+                <div class="palm-blessing-glow"></div>
+                <div class="f-thumb"></div>
+                <div class="palm-fingers">
+                  <div class="finger"></div>
+                  <div class="finger"></div>
+                  <div class="finger"></div>
+                  <div class="finger"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Royal Crimson Melmundu Silk -->
+          <div class="royal-melmundu"></div>
+
+          <!-- Kasavu Mundu (Dhoti with Gold Border) -->
+          <div class="maveli-mundu-skirt">
+            <div class="mundu-pleats-center"></div>
+            <div class="kasavu-border-accent"></div>
+            <div class="kasavu-gold-border-bottom"></div>
+          </div>
+
+          <!-- Padukam Sandals & Lotus Pedestal -->
+          <div class="maveli-feet-wrapper">
+            <div class="foot-padukam">
+              <div class="anklet-kolusu"></div>
+              <div class="padukam-knob"></div>
+            </div>
+            <div class="foot-padukam">
+              <div class="anklet-kolusu"></div>
+              <div class="padukam-knob"></div>
+            </div>
+          </div>
+
+          <div class="lotus-pedestal">
+            <div class="pedestal-petal"></div>
+            <div class="pedestal-petal"></div>
+            <div class="pedestal-petal"></div>
+            <div class="pedestal-petal"></div>
+            <div class="pedestal-petal"></div>
+            <div class="pedestal-petal"></div>
+            <div class="pedestal-petal"></div>
+          </div>
+        </article>
+
+        <!-- Right: Onathappan & Festive Sadya Offerings -->
+        <aside class="festive-offering-side" title="Onathappan & Sadya Offerings">
+          <div class="onathappan-idol">
+            <div class="thrikkakara-flower"></div>
+            <div class="thrikkakara-flower"></div>
+          </div>
+          <div class="uruli-vessel">
+            <div class="uruli-water"></div>
+            <div class="uruli-petal"></div>
+            <div class="uruli-petal"></div>
+            <div class="uruli-petal"></div>
+          </div>
+          <div class="plantain-leaf-mini">
+            <div class="payasam-bowl"></div>
+            <div class="banana-nendran"></div>
+          </div>
+        </aside>
+
+      </div>
+
+      <!-- Concentric Rotating Pookkalam (Floral Rangoli) -->
+      <section class="pookkalam-section" aria-label="Pookkalam Floral Carpet">
+        <div class="pookkalam-disc">
+          <div class="pookkalam-ring-outer"></div>
+          <div class="pookkalam-ring-mid1"></div>
+          <div class="pookkalam-ring-mid2"></div>
+          <div class="pookkalam-center-lotus">
+            <div class="pookkalam-center-bud"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Falling Petals Rain (Pure CSS) -->
+    <div class="petal-rain" aria-hidden="true">
+      <div class="petal p1"></div>
+      <div class="petal p2"></div>
+      <div class="petal p3"></div>
+      <div class="petal p4"></div>
+      <div class="petal p5"></div>
+      <div class="petal p6"></div>
+      <div class="petal p7"></div>
+      <div class="petal p8"></div>
+      <div class="petal p9"></div>
+      <div class="petal p10"></div>
+    </div>
+
+    <!-- Pure CSS Festive Crackers & Sparkles Section -->
+    <section class="crackers-sky" aria-label="Festive Sky Crackers and Sparkles">
+      <!-- Sky Starburst Bursts -->
+      <div class="cracker-burst cb-1 burst-gold">
+        <div class="ascent-rocket-spark"></div>
+        <div class="burst-center-flash"></div>
+        <div class="burst-star-cross"></div>
+        <div class="burst-ring"></div>
+      </div>
+
+      <div class="cracker-burst cb-2 burst-ruby">
+        <div class="ascent-rocket-spark"></div>
+        <div class="burst-center-flash"></div>
+        <div class="burst-star-cross"></div>
+        <div class="burst-ring"></div>
+      </div>
+
+      <div class="cracker-burst cb-3 burst-emerald">
+        <div class="ascent-rocket-spark"></div>
+        <div class="burst-center-flash"></div>
+        <div class="burst-star-cross"></div>
+        <div class="burst-ring"></div>
+      </div>
+
+      <div class="cracker-burst cb-4 burst-gold">
+        <div class="burst-center-flash"></div>
+        <div class="burst-star-cross"></div>
+        <div class="burst-ring"></div>
+      </div>
+
+      <div class="cracker-burst cb-5 burst-ruby">
+        <div class="burst-center-flash"></div>
+        <div class="burst-star-cross"></div>
+        <div class="burst-ring"></div>
+      </div>
+
+      <!-- Ground Pookkutty / Nilachakram Sparkler Fountains -->
+      <div class="sparkler-fountain-left">
+        <div class="fountain-spark-plume"></div>
+        <div class="fountain-cone-pot"></div>
+      </div>
+
+      <div class="sparkler-fountain-right">
+        <div class="fountain-spark-plume"></div>
+        <div class="fountain-cone-pot"></div>
+      </div>
+
+      <!-- Ambient Twinkling Star Sparkles -->
+      <div class="twinkle-star-sparkle ts-1"></div>
+      <div class="twinkle-star-sparkle ts-2"></div>
+      <div class="twinkle-star-sparkle ts-3"></div>
+      <div class="twinkle-star-sparkle ts-4"></div>
+      <div class="twinkle-star-sparkle ts-5"></div>
+    </section>
+
+    <!-- Footer Status -->
+    <footer class="app-footer">
+      Pure HTML &amp; CSS • No JavaScript • No Images • Zero Frameworks • Self-Contained Cascade
+    </footer>
+
+  </main>
+
+  <!-- Pure CSS Legend Dialog / Story Overlay -->
+  <aside class="story-modal-backdrop" aria-modal="true" role="dialog">
+    <div class="story-card">
+      <h2>The Legend of Mahabali &amp; Onam</h2>
+      <div class="malayalam-verse">
+        "മാവേലി നാടു വാണീടും കാലം,<br>
+        മാനുഷരെല്ലാരും ഒന്നുപോലെ..."
+      </div>
+      <p>
+        According to legend, King Mahabali's reign over Kerala was an era of unmatched prosperity, truthfulness, equality, and joy, where no sorrow or deceit existed.
+      </p>
+      <p>
+        Granted a boon to visit his beloved people once every year during the Malayalam month of Chingam, the people of Kerala celebrate his annual homecoming with vibrant Pookkalams, sumptuous Onasadya feasts, Vallamkali boat races, and joyful festivities.
+      </p>
+      <label for="toggle-story" class="close-story-btn">Close Legend</label>
+    </div>
+  </aside>
+
+</body>
+</html>
