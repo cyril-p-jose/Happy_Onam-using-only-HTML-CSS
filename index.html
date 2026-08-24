@@ -6,7 +6,10 @@
   <title>Onam Pure CSS Art — King Mahabali (Maveli)</title>
   <meta name="description" content="Pure HTML and CSS artwork celebrating Onam with King Mahabali, Olakkuda, Nilavilakku, and animated Pookkalam." />
   <style>
-   
+    /* ==========================================================================
+       ONAM PURE CSS ARTWORK — KING MAHABALI (MAVELI) & FESTIVAL GREETING
+       Rules: Pure HTML & CSS only. No JS. No images. No external fonts. <50KB.
+       ========================================================================== */
 
     :root {
       /* Palette */
@@ -98,6 +101,26 @@
 
     #toggle-petals:not(:checked) ~ .app-canvas .petal-rain {
       display: none;
+    }
+
+    #toggle-toran:not(:checked) ~ .app-canvas .festive-toran-layer {
+      display: none;
+    }
+
+    #toggle-deepam:checked ~ .app-canvas {
+      --lamp-glow: rgba(251, 191, 36, 0.92);
+      --aura-opacity: 1;
+      --text-glow: rgba(253, 224, 71, 0.95);
+    }
+
+    #toggle-deepam:checked ~ .app-canvas .nilavilakku-lamp,
+    #toggle-deepam:checked ~ .app-canvas .floating-diyas-layer,
+    #toggle-deepam:checked ~ .app-canvas .pookkalam-section {
+      filter: brightness(1.25) drop-shadow(0 0 20px rgba(251, 191, 36, 0.75));
+    }
+
+    #toggle-deepam:checked ~ .app-canvas .deepam-temple-glow {
+      opacity: 1;
     }
 
     #toggle-umbrella:checked ~ .app-canvas .olakkuda {
@@ -209,6 +232,8 @@
     #mode-day:checked ~ .controls-toolbar label[for="mode-day"],
     #mode-night:checked ~ .controls-toolbar label[for="mode-night"],
     #toggle-petals:checked ~ .controls-toolbar label[for="toggle-petals"],
+    #toggle-deepam:checked ~ .controls-toolbar label[for="toggle-deepam"],
+    #toggle-toran:checked ~ .controls-toolbar label[for="toggle-toran"],
     #toggle-umbrella:checked ~ .controls-toolbar label[for="toggle-umbrella"],
     #toggle-crackers:checked ~ .controls-toolbar label[for="toggle-crackers"] {
       background: linear-gradient(135deg, #f59e0b, #d97706);
@@ -2038,8 +2063,8 @@
     /* Festive Plantain Leaf (Vazhayila) */
     .plantain-leaf-mini {
       position: relative;
-      width: 84px;
-      height: 24px;
+      width: 96px;
+      height: 28px;
       background: linear-gradient(90deg, #15803d 0%, #22c55e 50%, #166534 100%);
       border-radius: 50% 50% 40% 40% / 80% 80% 20% 20%;
       border: 1px solid #86efac;
@@ -2048,23 +2073,132 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
+      gap: 4px;
+      padding: 0 4px;
     }
 
     .payasam-bowl {
-      width: 18px;
-      height: 12px;
+      position: relative;
+      width: 20px;
+      height: 14px;
       background: radial-gradient(circle at 40% 30%, #fef08a, #d97706);
       border-radius: 0 0 50% 50%;
       border: 1px solid #fff;
     }
 
+    .payasam-garnish {
+      position: absolute;
+      top: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 4px;
+      background: radial-gradient(circle, #fde68a 0%, #d97706 80%);
+      border-radius: 4px;
+    }
+
     .banana-nendran {
-      width: 14px;
+      width: 13px;
       height: 6px;
       background: #facc15;
       border-radius: 10px;
       transform: rotate(-15deg);
+    }
+
+    .sadya-pappadam {
+      width: 16px;
+      height: 16px;
+      background: radial-gradient(circle at 35% 35%, #fffbeb 0%, #fef3c7 50%, #fde68a 85%, #d97706 100%);
+      border-radius: 50%;
+      border: 1px solid #fef08a;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .sadya-banana-chips {
+      width: 9px;
+      height: 9px;
+      background: radial-gradient(circle, #fde047 0%, #eab308 70%, #ca8a04 100%);
+      border-radius: 50%;
+      border: 1px solid #fef08a;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .sadya-sarkara-chips {
+      width: 8px;
+      height: 8px;
+      background: linear-gradient(135deg, #78350f 0%, #451a03 100%);
+      border-radius: 2px;
+      border: 1px solid #b45309;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Onathappan Sacred Rice Paste (Chandu / Ari-mavu) Markings */
+    .onathappan-idol::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      width: 22px;
+      height: 2px;
+      background: #ffffff;
+      box-shadow: 0 8px 0 #ffffff, 0 16px 0 #ffffff;
+      border-radius: 1px;
+      opacity: 0.85;
+    }
+
+    /* Jasmine Flower Garland on Nilavilakku */
+    .lamp-jasmine-garland {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 14px;
+      border: 2.5px dotted #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #fef08a;
+      z-index: 5;
+    }
+
+    .lamp-floor-glow {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 20px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(251, 191, 36, 0.45) 0%, rgba(245, 158, 11, 0.15) 50%, transparent 80%);
+      filter: blur(4px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Mini Glowing Diya in Pookkalam Lotus Core */
+    .pookkalam-mini-diya {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fef08a 0%, #f59e0b 45%, #b45309 80%, #78350f 100%);
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 0 14px rgba(250, 204, 21, 0.9), inset 0 0 4px #dc2626;
+      z-index: 8;
+    }
+    .pookkalam-mini-diya::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 8px #ffffff, 0 0 16px #f59e0b;
+      animation: flame-inner-core 0.8s ease-in-out infinite alternate;
     }
 
     /* ==========================================================================
@@ -2387,6 +2521,130 @@
       border: 1px solid rgba(251, 191, 36, 0.3);
       backdrop-filter: blur(6px);
       flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       FESTIVE TORAN GARLANDS LAYER (KURUTHOLA, MARIGOLD & MANGO LEAF ARCHES)
+       ========================================================================== */
+    .festive-toran-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 48px;
+      pointer-events: none;
+      z-index: 80;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 8px;
+      overflow: hidden;
+    }
+
+    .toran-arch {
+      position: relative;
+      flex: 1;
+      height: 32px;
+      border-bottom: 2px dashed #f59e0b;
+      border-radius: 0 0 50% 50% / 0 0 100% 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      padding-bottom: 2px;
+      animation: toran-sway 4.5s ease-in-out infinite alternate;
+      transform-origin: top center;
+    }
+    .toran-arch:nth-child(2) { animation-delay: -1.5s; }
+    .toran-arch:nth-child(3) { animation-delay: -3s; }
+
+    .toran-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform-origin: top center;
+      animation: toran-item-sway 3.2s ease-in-out infinite alternate;
+    }
+    .toran-item:nth-child(even) { animation-delay: -1.6s; }
+
+    .toran-leaf {
+      width: 8px;
+      height: 18px;
+      background: linear-gradient(180deg, #15803d 0%, #166534 60%, #064e3b 100%);
+      border-radius: 50% 50% 20% 20% / 70% 70% 30% 30%;
+      clip-path: polygon(50% 0%, 100% 70%, 50% 100%, 0% 70%);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .toran-marigold {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fde047 0%, #f59e0b 50%, #ea580c 80%, #7c2d12 100%);
+      box-shadow: 0 0 6px rgba(245, 158, 11, 0.6);
+      border: 1px solid #fef08a;
+    }
+
+    .toran-bell {
+      width: 10px;
+      height: 12px;
+      background: radial-gradient(circle at 40% 30%, #fffbeb 0%, #f59e0b 50%, #92400e 90%);
+      clip-path: polygon(30% 0%, 70% 0%, 100% 85%, 85% 100%, 15% 100%, 0% 85%);
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 0 5px rgba(251, 191, 36, 0.6);
+      position: relative;
+    }
+    .toran-bell::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #dc2626;
+    }
+
+    /* Ambient Deepam Temple Illumination Layer */
+    .deepam-temple-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 65%, rgba(251, 191, 36, 0.22) 0%, rgba(234, 88, 12, 0.08) 50%, transparent 80%);
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    /* Sparkling Jewel Glints on Crown, Kundalam, and Ornaments */
+    .jewel-sparkle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #ffffff, 0 0 12px #fde047;
+      animation: jewel-twinkle 2.2s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 20;
+    }
+    .js-1 { top: 8px; left: 16px; animation-delay: 0.1s; }
+    .js-2 { top: 12px; right: 18px; animation-delay: 0.8s; }
+    .js-3 { top: 48px; left: 50%; transform: translateX(-50%); animation-delay: 1.4s; }
+
+    @keyframes jewel-twinkle {
+      0%, 100% { transform: scale(0.3); opacity: 0.2; }
+      50% { transform: scale(1.6); opacity: 1; filter: drop-shadow(0 0 8px #ffffff); }
+    }
+
+    @keyframes toran-sway {
+      0% { transform: rotate(-1deg); }
+      100% { transform: rotate(1deg); }
+    }
+
+    @keyframes toran-item-sway {
+      0% { transform: rotate(-2.5deg); }
+      100% { transform: rotate(2.5deg); }
     }
 
     /* ==========================================================================
@@ -3452,6 +3710,8 @@
   <input type="radio" name="time-mode" id="mode-night" class="css-control-input" />
   <input type="checkbox" id="toggle-petals" class="css-control-input" checked />
   <input type="checkbox" id="toggle-crackers" class="css-control-input" checked />
+  <input type="checkbox" id="toggle-deepam" class="css-control-input" checked />
+  <input type="checkbox" id="toggle-toran" class="css-control-input" checked />
   <input type="checkbox" id="toggle-umbrella" class="css-control-input" />
   <input type="checkbox" id="toggle-story" class="css-control-input" />
 
@@ -3463,13 +3723,43 @@
     <div class="ctrl-divider"></div>
     <label for="toggle-petals" class="ctrl-btn" title="Toggle Falling Marigolds">🌸 Petals</label>
     <label for="toggle-crackers" class="ctrl-btn" title="Toggle Festive Crackers & Sparkles">✨ Crackers</label>
-    <label for="toggle-umbrella" class="ctrl-btn" title="Tilt Maveli's Olakkuda">☂️ Tilt Umbrella</label>
+    <label for="toggle-deepam" class="ctrl-btn" title="Toggle Temple Deepam Glow">🪔 Deepam</label>
+    <label for="toggle-toran" class="ctrl-btn" title="Toggle Floral Garlands">🌿 Toran</label>
+    <label for="toggle-umbrella" class="ctrl-btn" title="Tilt Maveli's Olakkuda">☂️ Umbrella</label>
     <div class="ctrl-divider"></div>
     <label for="toggle-story" class="ctrl-btn" title="Read Maveli's Legend">📜 Legend</label>
   </nav>
 
   <!-- Main Canvas -->
   <main class="app-canvas">
+
+    <!-- Ambient Deepam Temple Illumination Layer -->
+    <div class="deepam-temple-glow" aria-hidden="true"></div>
+
+    <!-- Festive Toran Floral and Mango Leaf Garlands -->
+    <div class="festive-toran-layer" aria-label="Festive Toran Floral and Mango Leaf Garlands">
+      <div class="toran-arch">
+        <div class="toran-item"><div class="toran-leaf"></div></div>
+        <div class="toran-item"><div class="toran-marigold"></div></div>
+        <div class="toran-item"><div class="toran-bell"></div></div>
+        <div class="toran-item"><div class="toran-marigold"></div></div>
+        <div class="toran-item"><div class="toran-leaf"></div></div>
+      </div>
+      <div class="toran-arch">
+        <div class="toran-item"><div class="toran-leaf"></div></div>
+        <div class="toran-item"><div class="toran-marigold"></div></div>
+        <div class="toran-item"><div class="toran-bell"></div></div>
+        <div class="toran-item"><div class="toran-marigold"></div></div>
+        <div class="toran-item"><div class="toran-leaf"></div></div>
+      </div>
+      <div class="toran-arch">
+        <div class="toran-item"><div class="toran-leaf"></div></div>
+        <div class="toran-item"><div class="toran-marigold"></div></div>
+        <div class="toran-item"><div class="toran-bell"></div></div>
+        <div class="toran-item"><div class="toran-marigold"></div></div>
+        <div class="toran-item"><div class="toran-leaf"></div></div>
+      </div>
+    </div>
 
     <!-- Scenic Silhouette Backdrop -->
     <div class="scenery-backdrop">
@@ -3642,11 +3932,13 @@
           </div>
           <div class="lamp-oil-basin"></div>
           <div class="lamp-stem">
+            <div class="lamp-jasmine-garland"></div>
             <div class="lamp-stem-ring r1"></div>
             <div class="lamp-stem-ring r2"></div>
             <div class="lamp-stem-ring r3"></div>
           </div>
           <div class="lamp-base-pedestal"></div>
+          <div class="lamp-floor-glow"></div>
         </aside>
 
         <!-- Center: King Mahabali (Maveli) Pure CSS Artwork -->
@@ -3682,6 +3974,8 @@
             </div>
             <div class="crown-ear-wing-left"></div>
             <div class="crown-ear-wing-right"></div>
+            <div class="jewel-sparkle js-1"></div>
+            <div class="jewel-sparkle js-2"></div>
           </div>
 
           <!-- Maveli Head & Expressive Facial Features -->
@@ -3761,6 +4055,7 @@
             <div class="necklace-kasumala"></div>
             <div class="necklace-navaratna">
               <div class="pendant-gold"></div>
+              <div class="jewel-sparkle js-3"></div>
             </div>
 
             <!-- Golden Belt (Udarabandham) -->
@@ -3845,7 +4140,12 @@
             <div class="uruli-petal"></div>
           </div>
           <div class="plantain-leaf-mini">
-            <div class="payasam-bowl"></div>
+            <div class="sadya-pappadam"></div>
+            <div class="sadya-banana-chips"></div>
+            <div class="sadya-sarkara-chips"></div>
+            <div class="payasam-bowl">
+              <div class="payasam-garnish"></div>
+            </div>
             <div class="banana-nendran"></div>
           </div>
         </aside>
@@ -3859,7 +4159,9 @@
           <div class="pookkalam-ring-mid1"></div>
           <div class="pookkalam-ring-mid2"></div>
           <div class="pookkalam-center-lotus">
-            <div class="pookkalam-center-bud"></div>
+            <div class="pookkalam-center-bud">
+              <div class="pookkalam-mini-diya"></div>
+            </div>
           </div>
         </div>
       </section>
